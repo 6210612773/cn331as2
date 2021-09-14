@@ -1,0 +1,14 @@
+{% extends "subject/layout.html" %}
+
+
+{% block content%}
+                <h1>!!Please submit your registration!!</h1>
+                <ul> 
+                    <li>Course code : {{ subject.code }}</li>
+                    <li>Subject name : {{ subject.name }}</li>
+                    <li>Semester :{{ subject.semester }} </li>
+                    <li>year : {{ subject.year }}</li>
+                    <li>Course Capacity : {{ subject.seat }}</li>
+                </ul>
+                <p><a href="{% url 'subject:index' %}">back</a></p>
+{% endblock %}
