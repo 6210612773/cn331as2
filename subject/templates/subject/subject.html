@@ -1,30 +1,65 @@
 {% extends "subject/layout.html" %}
-
+{% block title %}Course Register{% endblock %}
 
 {% block content%}
-    <h1>!!Please submit your registration!!</h1>
-    <ul> 
-        <li>Course code : {{ subject.code }}</li>
-        <li>Subject name : {{ subject.name }}</li>
-        <li>Semester :{{ subject.semester }} </li>
-        <li>year : {{ subject.year }}</li>
-        <li>Course Capacity : {{ subject.seat }}</li>
-    </ul>
+
+    <div class="row text-center" style="max-width: 600px;margin:auto;">
+        <div class="col">
+            <div class="card card-body text-center">
+                <h5>Please submit your registration</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <td>Course code : {{ subject.code }}</td>
+                    </tr>
+                    <tr>
+                        <td>Subject name : {{ subject.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Semester :{{ subject.semester }}</td>
+                    </tr>
+                    <tr>
+                        <td>year : {{ subject.year }}</td>
+                    </tr>
+                    <tr>
+                        <td>Course Capacity : {{ subject.seat }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ subject.count }} Student is in this course</td>
+                    </tr>
 
 
-    <h2>Register in this subject</h2>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div style="text-align: center;">       
+    {% if request.user.is_superuser %}
+    <h2  style="color:white; margin-top:3%">Registered in this subject</h2>
     <ul>
         {% for i in students %}
-        <li>{{ i.first_name }} {{ i.last_name }}</li>
+        <p style="color:yellow">{{ i.first_name }} {{ i.last_name }}</p>
         {% empty %}
-        <li>No studenet in this subject</li>
+        <p style="color:white">No student in this subject</p>
         {% endfor %}
     </ul>
-    {% if number > 0 %}
-    <p><a href="{% url 'subject:register' subject.id %}">Register</a></p>
     {% endif %}
-    <p><a href="{% url 'subject:remove' subject.id %}">Remove</a></p>
-    <p><a href="{% url 'subject:index' %}">back</a></p>
-    
+    {% if subject.status and not subject.isfull and request.user not in students %}
+    <br>
+    <p><a href="{% url 'subject:register' subject.id %} " class="btn btn-md btn-success opacity-75">Register</a></p>
+    <br>
+    {% endif %}
+    {% if request.user in students %} 
+    <p style="color:white">You have registered</p>
+    {% endif %}
+    {% if subject.status and request.user in students %}
+    <p><a href="{% url 'subject:remove' subject.id %}" class="btn btn-md btn-danger opacity-75">Remove</a></p>
+    <br>
+    {% endif %}
+    <p><a href="{% url 'subject:index' %}" class="btn btn-md btn-success opacity-75">back</a></p>
+</div>
 
 {% endblock %}

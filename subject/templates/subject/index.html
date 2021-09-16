@@ -1,13 +1,11 @@
 {% extends "subject/layout.html" %}
-
+{% block title %}Course List{% endblock %}
 {% block content %}
 
-        <br>
-
-        <div class="row">
-            <div class="col-md">
-                <div class="card card-body">
-                    <h5>Subjects</h5>
+        <div class="row text-center" style="max-width: 600px;margin:auto;">
+            <div class="col">
+                <div class="card card-body text-center">
+                    <h5>SUBJECT LISTS</h5>
                 </div>
                 <div class="card card-body">
                     <table class="table">
@@ -15,8 +13,6 @@
                         {% for i in subject %}
                             <tr>
                                 <td><a href="{% url 'subject:subject' i.id %}">{{i.code}} {{i.name}}</a></td>
-
-
                             </tr>
                         {% endfor %}
 
@@ -25,8 +21,14 @@
             </div>
 
         </div>
-        <p><a href="{% url 'users:index' %}">Information</a></p>
-        <p><a href="{% url 'users:logout' %}">Logout</a></p>
-
-
+        <br>
+        <div class="contaner text-center" style="margin:auto">
+        <a href="{% url 'users:index' %}" class="btn btn-md btn-success opacity-75">Student Information</a>
+        <br>        <br>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'admin:index' %}" class="btn btn-md btn-success opacity-75">Manage Course</a>
+        <br>        <br>
+        {% endif %}
+        <a href="{% url 'users:logout' %}" class="btn btn-md btn-success opacity-75">Logout</a>
+        </div>
 {% endblock content %}

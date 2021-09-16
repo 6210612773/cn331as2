@@ -1,15 +1,31 @@
 {% extends "users/layout.html" %}
-
+{% block title %}User Login{% endblock %}
 {% block body %} 
+    <br>
 
-    {% if message %}
-        {{ message }}
-    {% endif %}
-        
-    <form action="{% url 'users:login' %}" method="post">
+
+    <div class="text-center">
+
+    <br><br>
+    <form style="max-width: 380px;margin:auto;" action="{% url 'users:login' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login">
+            <h2 style="color:white">WELCOME</h2>
+            <br>
+            <h2 style="color:white">Classroom Registration</h2>
+            <br>
+            <h5 style="color:white">Please Login</h5>
+            <br>
+            <input type="text" name="username" placeholder="Username" class="form-control">
+            <input type="password" name="password" placeholder="Password" class="form-control">
+            <br>
+            <input type="submit" value="Login" class="btn btn-lg btn-success opacity-75">
+
         </form>
+        <br>
+        <h4 style="color:red">
+            {% if message %}
+            {{ message }}
+        </h4>
+        {% endif %}
+    </div>
 {% endblock %} 

@@ -10,6 +10,7 @@ class Subject(models.Model):
     year = models.IntegerField()
     seat = models.IntegerField()
     status = models.BooleanField()
+    isfull = models.BooleanField(default=False)
     register = models.ManyToManyField(User, blank = True, related_name = "students")
     count = models.IntegerField(default=0)
 

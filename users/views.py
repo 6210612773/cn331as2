@@ -23,7 +23,7 @@ def loginPage(request):
             return HttpResponseRedirect(reverse("subject:index"))
         else:
             return render(request, "users/login.html", {
-                "message ": "invalid credential."
+                "message": "invalid credential."
             })
     return render(request, "users/login.html")
 

@@ -13,11 +13,9 @@ def index(request):
 
 def subjectPage(request, subject_id):
     subject = Subject.objects.get(pk=subject_id)
-    number = subject.seat - subject.count
     return render(request, "subject/subject.html", {
         "subject": subject,
         "students": subject.register.all(),
-        "number": number
     })
 
 def register(request, subject_id):
@@ -29,6 +27,10 @@ def register(request, subject_id):
         subject.register.add(request.user)
         select = Subject.objects.get(id=subject_id)
         select.count += 1
+        if select.count == select.seat:
+            select.isfull = True
+        if select.count < select.seat:
+            select.isfull = False
         select.save()
     return HttpResponseRedirect(reverse("subject:subject", args=(subject_id,)))
 
@@ -42,5 +44,9 @@ def remove(request, subject_id):
         subject.register.remove(request.user)
         select = Subject.objects.get(id=subject_id)
         select.count -= 1
+        if select.count == select.seat:
+            select.isfull = True
+        if select.count < select.seat:
+            select.isfull = False
         select.save()
     return HttpResponseRedirect(reverse("subject:subject", args=(subject_id,)))

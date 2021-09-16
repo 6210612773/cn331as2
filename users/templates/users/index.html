@@ -1,14 +1,28 @@
 {% extends "users/layout.html" %}
-
+{% block title %}User information{% endblock %}
 {% block body %} 
+<br>
+<br>
+ <h1 style="margin-left:30%; color:white">Student Information</h1>
 
- <h1>WELCOME {{ request.user.first_name }}</h1>
-    <ul>
-        <li>Username: {{ request.user.username }}</li>
-        <li>First name: {{ request.user.first_name }}</li>
-        <li>Last name: {{ request.user.last_name }}</li>
-        <li>Email: {{ request.user.email }}</li>
-    </ul>
+    <div class="w-50 p-3">
+    <table style="margin-left:35%" class="table table-dark table-bordered table-sm">
+        <tr>
+            <td>Username   : {{ request.user.username }}</td>
+        </tr>
+        <tr>
+            <td>First name : {{ request.user.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Last name : {{ request.user.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Email      : {{ request.user.email }}</td>
+        </tr>
 
-    <p><a href="{% url 'subject:index' %}">Back</a></p>
+    </table>
+    </div>
+
+    <p style="margin-left:40%"><a href="{% url 'subject:index' %}"  class="btn btn-lg btn-success opacity-75"   >Back</a></p>
+
 {% endblock %} 
