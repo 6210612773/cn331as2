@@ -44,8 +44,6 @@ def remove(request, subject_id):
         subject.register.remove(request.user)
         select = Subject.objects.get(id=subject_id)
         select.count -= 1
-        if select.count == select.seat:
-            select.isfull = True
         if select.count < select.seat:
             select.isfull = False
         select.save()
