@@ -3,3 +3,4 @@ cryptography==3.4.8
 pycparser==2.20
 gunicorn
 django-heroku
+coverage==5.5
